@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap');
+
+:root {
+  --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Space Grotesk', monospace;
+
+  /* Fire TV Theme Palette */
+  --bg-dark: #080A12;
+  --bg-card: rgba(18, 23, 38, 0.75);
+  --bg-card-hover: rgba(30, 38, 62, 0.9);
+  --border-card: rgba(255, 255, 255, 0.12);
+
+  /* Amazon & Game Accents */
+  --amazon-orange: #FF9900;
+  --amazon-orange-glow: rgba(255, 153, 0, 0.4);
+  --fire-cyan: #00F0FF;
+  --fire-cyan-glow: rgba(0, 240, 255, 0.4);
+  --fire-pink: #FF007A;
+  --fire-green: #00FF87;
+  --fire-gold: #FFD700;
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+
+  --shadow-tv: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--bg-dark);
+  font-family: var(--font-main);
+  color: var(--text-primary);
+  background-image: 
+    radial-gradient(circle at 15% 20%, rgba(255, 153, 0, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(0, 240, 255, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(13, 17, 28, 1) 0%, rgba(8, 10, 18, 1) 100%);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TV Focusable Element States */
+.tv-focusable {
+  outline: none;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  border: 2px solid transparent;
+}
+
+.tv-focusable:focus,
+.tv-focusable.is-focused {
+  border-color: var(--amazon-orange);
+  transform: scale(1.06);
+  box-shadow: 0 0 25px var(--amazon-orange-glow), inset 0 0 15px rgba(255, 153, 0, 0.2);
+  z-index: 10;
+}
+
+.tv-focusable.focus-cyan:focus,
+.tv-focusable.focus-cyan.is-focused {
+  border-color: var(--fire-cyan);
+  box-shadow: 0 0 25px var(--fire-cyan-glow), inset 0 0 15px rgba(0, 240, 255, 0.2);
+}
+
+.tv-focusable.focus-pink:focus,
+.tv-focusable.focus-pink.is-focused {
+  border-color: var(--fire-pink);
+  box-shadow: 0 0 25px rgba(255, 0, 122, 0.4), inset 0 0 15px rgba(255, 0, 122, 0.2);
+}
+
+.tv-focusable.focus-green:focus,
+.tv-focusable.focus-green.is-focused {
+  border-color: var(--fire-green);
+  box-shadow: 0 0 25px rgba(0, 255, 135, 0.4), inset 0 0 15px rgba(0, 255, 135, 0.2);
+}
+
+/* Fire TV Focus Pulse Glow Animation */
+@keyframes tvGlowPulse {
+  0% { box-shadow: 0 0 20px var(--amazon-orange-glow); }
+  50% { box-shadow: 0 0 35px rgba(255, 153, 0, 0.7); }
+  100% { box-shadow: 0 0 20px var(--amazon-orange-glow); }
+}
+
+.tv-focusable:focus-visible {
+  animation: tvGlowPulse 2s infinite ease-in-out;
+}
+
+/* Glassmorphism TV Card */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-tv);
+}
+
+.glass-panel-glow {
+  background: linear-gradient(135deg, rgba(30, 40, 65, 0.8) 0%, rgba(15, 20, 35, 0.85) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-lg);
+}
+
+/* Scrollbar styling for TV lists */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 153, 0, 0.5);
+  border-radius: 10px;
+}
+
+/* Fire TV Remote Overlay HUD */
+.remote-hud {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  background: rgba(10, 14, 26, 0.92);
+  border: 1px solid rgba(255, 153, 0, 0.4);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Badge styles */
+.badge-amazon {
+  background: linear-gradient(90deg, #FF9900 0%, #FF5500 100%);
+  color: #000000;
+  font-weight: 800;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.badge-bedrock {
+  background: linear-gradient(90deg, #00F0FF 0%, #7000FF 100%);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+/* Utility Animations */
+@keyframes floatAnim {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+.animate-float {
+  animation: floatAnim 3s ease-in-out infinite;
+}
+
+@keyframes pulseRing {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+.animate-pulse-ring {
+  animation: pulseRing 2s ease-in-out infinite;
+}
