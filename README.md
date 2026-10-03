@@ -3,6 +3,9 @@
 > **Level Up Your Living Room — Play, Move, and Fit Together!**  
 > *Multi-Modal Family AI Fitness Game & 10-Foot Remote Spatial UI Experience built for Amazon Fire TV with AWS Bedrock AI.*
 
+[![Family Fit Quest Video Demo](https://img.youtube.com/vi/33N97vRrPTM/maxresdefault.jpg)](https://www.youtube.com/watch?v=33N97vRrPTM)  
+🎥 **[Watch Full Video Demo on YouTube](https://www.youtube.com/watch?v=33N97vRrPTM)**
+
 ---
 
 ## 🏆 Hackathon Track & Mini-Challenges Entered
