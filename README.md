@@ -1,7 +1,7 @@
 # 🚀 Family Fit Quest — Amazon Developer Hackathon (Fire TV Track)
 
-> **Multi-Modal Family AI Fitness Game & 10-Foot Remote Spatial UI Experience**  
-> *Built for Amazon Fire TV with AWS Bedrock AI and @family-fit/pose-stream open-source computer vision relay.*
+> **Level Up Your Living Room — Play, Move, and Fit Together!**  
+> *Multi-Modal Family AI Fitness Game & 10-Foot Remote Spatial UI Experience built for Amazon Fire TV with AWS Bedrock AI.*
 
 ---
 
@@ -76,10 +76,12 @@ cd family-fit-quest
 npm install
 
 # 3. Start local dev server (Fire TV Simulator Mode)
-npm run dev
-```
+Open your browser locally or navigate to your live **Vercel Deployment URL**. Use your keyboard arrow keys or click the on-screen **Fire TV Remote HUD** to navigate.
 
-Open your browser at `http://localhost:5173`. Use your keyboard arrow keys or click the on-screen **Fire TV Remote HUD** to navigate.
+### 🚀 Deploying to Vercel
+1. Push project to GitHub or run `vercel` CLI.
+2. Production build output is located in `dist/`.
+3. Vercel automatically detects Vite settings from `vercel.json`.
 
 ---
 

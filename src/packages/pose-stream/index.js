@@ -9,7 +9,9 @@
 
 export class PoseStreamClient {
   constructor(options = {}) {
-    this.serverUrl = options.serverUrl || 'wss://localhost:8080/pose-stream';
+    const defaultProtocol = typeof window !== 'undefined' && window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const defaultHost = typeof window !== 'undefined' && window.location.host ? window.location.host : 'family-fit-quest.vercel.app';
+    this.serverUrl = options.serverUrl || `${defaultProtocol}//${defaultHost}/pose-stream`;
     this.deviceId = options.deviceId || `phone-${Math.random().toString(36).substring(2, 7)}`;
     this.onPoseData = options.onPoseData || null;
     this.socket = null;

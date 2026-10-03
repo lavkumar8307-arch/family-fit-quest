@@ -25,32 +25,67 @@ export const SubmissionHubModal = () => {
       gap: '24px'
     }}>
       {/* Top Banner */}
-      <div className="glass-panel-glow" style={{ padding: '32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
+      <div style={{
+        background: 'rgba(12, 17, 30, 0.9)',
+        borderRadius: '24px',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        padding: '24px 32px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <div style={{
-            width: '60px',
-            height: '60px',
-            borderRadius: '20px',
-            background: 'linear-gradient(135deg, #FF9900 0%, #FF007A 100%)',
+            width: '48px',
+            height: '48px',
+            borderRadius: '14px',
+            background: 'linear-gradient(135deg, #FF5500 0%, #FF007A 100%)',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: '0 0 30px rgba(255, 153, 0, 0.5)'
+            justifyContent: 'center'
           }}>
-            <Trophy size={36} color="#FFFFFF" />
+            <Trophy size={26} color="#FFFFFF" />
           </div>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <h2 style={{ fontSize: '2.2rem', fontWeight: '900', color: '#FFFFFF', margin: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <h2 style={{ fontSize: '2rem', fontWeight: '900', color: '#FFFFFF', margin: 0, letterSpacing: '-0.01em' }}>
                 Amazon Developer Hackathon Submission Hub
               </h2>
-              <span className="badge-amazon">Fire TV Track</span>
+              <span style={{
+                padding: '4px 12px',
+                borderRadius: '12px',
+                background: 'rgba(255, 153, 0, 0.2)',
+                color: '#FF9900',
+                border: '1px solid rgba(255, 153, 0, 0.4)',
+                fontWeight: '800',
+                fontSize: '0.72rem',
+                textTransform: 'uppercase'
+              }}>
+                FIRE TV TRACK
+              </span>
             </div>
-            <p style={{ color: '#94A3B8', marginTop: '6px', fontSize: '1rem' }}>
-              Project: <strong>Family Fit Quest</strong> • Primary Track: Fire TV • Mini Challenges: AWS Builder & Open Source
+            <p style={{ color: '#94A3B8', marginTop: '4px', fontSize: '0.9rem' }}>
+              Project: Family Fit Quest • Primary Track: Fire TV • Mini Challenges: AWS Builder & Open Source
             </p>
           </div>
         </div>
+
+        <button style={{
+          padding: '12px 24px',
+          borderRadius: '16px',
+          background: 'linear-gradient(90deg, #FF9900 0%, #FF007A 100%)',
+          color: '#FFFFFF',
+          fontWeight: '800',
+          fontSize: '0.95rem',
+          border: 'none',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          cursor: 'pointer',
+          boxShadow: '0 0 20px rgba(255, 153, 0, 0.4)'
+        }}>
+          Review submission ↗
+        </button>
       </div>
 
       {/* Sub-navigation Tabs */}
@@ -71,13 +106,13 @@ export const SubmissionHubModal = () => {
             tabIndex={0}
             className={`tv-focusable ${activeSubTab === tab.id ? 'is-focused' : ''}`}
             style={{
-              padding: '12px 20px',
-              borderRadius: '14px',
-              background: activeSubTab === tab.id ? 'rgba(255, 153, 0, 0.2)' : 'rgba(255, 255, 255, 0.05)',
+              padding: '10px 20px',
+              borderRadius: '16px',
+              background: activeSubTab === tab.id ? 'rgba(255, 153, 0, 0.15)' : 'rgba(255, 255, 255, 0.04)',
               color: activeSubTab === tab.id ? '#FF9900' : '#E2E8F0',
               fontWeight: '800',
-              fontSize: '0.95rem',
-              border: activeSubTab === tab.id ? '1px solid #FF9900' : '1px solid rgba(255,255,255,0.1)'
+              fontSize: '0.9rem',
+              border: activeSubTab === tab.id ? '1px solid #FF9900' : '1px solid rgba(255,255,255,0.08)'
             }}
           >
             {tab.label}
@@ -87,34 +122,125 @@ export const SubmissionHubModal = () => {
 
       {/* Tab Content: Project Description */}
       {activeSubTab === 'overview' && (
-        <div className="glass-panel" style={{ padding: '32px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          <h3 style={{ fontSize: '1.4rem', color: '#FF9900', fontWeight: '800', margin: 0 }}>
-            What Family Fit Quest Does & How It Works
-          </h3>
-          <p style={{ fontSize: '1rem', color: '#E2E8F0', lineHeight: '1.6' }}>
-            <strong>Family Fit Quest</strong> is an interactive multi-player family fitness game built for Amazon Fire TV (10-foot UI experience). Up to 4 family members (kids and parents) play together on screen through exciting adventure quest modes (Jungle Dash, Cosmic Dance-Off, Lava Temple Escape, Superhero Academy).
-          </p>
-          
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px', marginTop: '10px' }}>
-            <div style={{ background: 'rgba(255,255,255,0.04)', padding: '18px', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.08)' }}>
-              <h4 style={{ color: '#00F0FF', margin: 0, fontSize: '1.05rem', fontWeight: '800' }}>📺 10-Foot Spatial UI</h4>
-              <p style={{ fontSize: '0.85rem', color: '#94A3B8', marginTop: '6px' }}>
-                Full D-Pad focus mapping designed specifically for Fire TV remote controllers (Arrow Keys, Select, Esc/Back, Home).
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          {/* Upper Grid (2 Column) */}
+          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '20px' }}>
+            {/* Left Card */}
+            <div className="glass-panel" style={{ padding: '28px', borderRadius: '24px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: '800', color: '#FF9900', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+                  ⚡ WHY FAMILY FIT QUEST EXISTS
+                </span>
+              </div>
+              <h3 style={{ fontSize: '2rem', fontWeight: '900', color: '#FFFFFF', margin: 0, letterSpacing: '-0.01em' }}>
+                Turn family screen time into shared movement.
+              </h3>
+              <p style={{ fontSize: '0.95rem', color: '#94A3B8', lineHeight: '1.6', margin: 0 }}>
+                Family Fit Quest is an interactive multi-player fitness game built for the Amazon Fire TV 10-foot UI experience. Up to four family members move together through exciting adventure quest modes — Jungle Dash, Cosmic Dance-Off, Lava Temple Escape, and Superhero Academy.
               </p>
             </div>
 
-            <div style={{ background: 'rgba(255,255,255,0.04)', padding: '18px', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.08)' }}>
-              <h4 style={{ color: '#FF9900', margin: 0, fontSize: '1.05rem', fontWeight: '800' }}>🤖 AWS Bedrock AI Engine</h4>
-              <p style={{ fontSize: '0.85rem', color: '#94A3B8', marginTop: '6px' }}>
-                Generates kid-friendly post-workout stories, individual family member badges, and adaptive fitness advice via Claude 3.5 Sonnet & Amazon Nova.
+            {/* Right Card: Submission Snapshot */}
+            <div className="glass-panel" style={{ padding: '24px', borderRadius: '24px', border: '1px solid #00F0FF', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <h4 style={{ color: '#FFFFFF', margin: 0, fontSize: '1.1rem', fontWeight: '800' }}>
+                Submission snapshot
+              </h4>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
+                <div style={{ background: 'rgba(255,255,255,0.04)', padding: '12px 8px', borderRadius: '12px', textAlign: 'center' }}>
+                  <div style={{ fontSize: '1.6rem', fontWeight: '900', color: '#FFFFFF' }}>9</div>
+                  <div style={{ fontSize: '0.68rem', color: '#94A3B8' }}>Polished screens</div>
+                </div>
+                <div style={{ background: 'rgba(255,255,255,0.04)', padding: '12px 8px', borderRadius: '12px', textAlign: 'center' }}>
+                  <div style={{ fontSize: '1.6rem', fontWeight: '900', color: '#FFFFFF' }}>4</div>
+                  <div style={{ fontSize: '0.68rem', color: '#94A3B8' }}>Quest modes</div>
+                </div>
+                <div style={{ background: 'rgba(255,255,255,0.04)', padding: '12px 8px', borderRadius: '12px', textAlign: 'center' }}>
+                  <div style={{ fontSize: '1.6rem', fontWeight: '900', color: '#FFFFFF' }}>3</div>
+                  <div style={{ fontSize: '0.68rem', color: '#94A3B8' }}>AWS services</div>
+                </div>
+              </div>
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <span style={{ padding: '4px 10px', borderRadius: '10px', background: 'rgba(255,153,0,0.2)', color: '#FF9900', fontWeight: '800', fontSize: '0.65rem' }}>FIRE TV</span>
+                <span style={{ padding: '4px 10px', borderRadius: '10px', background: 'rgba(157,0,255,0.2)', color: '#9D00FF', fontWeight: '800', fontSize: '0.65rem' }}>BEDROCK</span>
+                <span style={{ padding: '4px 10px', borderRadius: '10px', background: 'rgba(0,240,255,0.2)', color: '#00F0FF', fontWeight: '800', fontSize: '0.65rem' }}>ALEXA</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Middle Grid (3 Feature Cards) */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+            <div className="glass-panel" style={{ padding: '24px', borderRadius: '20px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <h4 style={{ color: '#00F0FF', margin: 0, fontSize: '1.2rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                ➕ Spatial UI
+              </h4>
+              <p style={{ fontSize: '0.88rem', color: '#94A3B8', lineHeight: '1.5', margin: 0 }}>
+                10-foot UI and remote-friendly D-pad focus states designed specifically for Fire TV controllers.
               </p>
+              <div style={{ fontSize: '0.75rem', color: '#64748B', marginTop: 'auto' }}>
+                Arrow keys • Select • Back • Strong focus memory
+              </div>
             </div>
 
-            <div style={{ background: 'rgba(255,255,255,0.04)', padding: '18px', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.08)' }}>
-              <h4 style={{ color: '#00FF87', margin: 0, fontSize: '1.05rem', fontWeight: '800' }}>📱 Mobile Vision Pose Relay</h4>
-              <p style={{ fontSize: '0.85rem', color: '#94A3B8', marginTop: '6px' }}>
-                Uses an open-source library (@family-fit/pose-stream) to relay coffee-table phone camera pose vectors to Fire TV over WebSockets.
+            <div className="glass-panel" style={{ padding: '24px', borderRadius: '20px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <h4 style={{ color: '#FF9900', margin: 0, fontSize: '1.2rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                🤖 AWS Bedrock AI Engine
+              </h4>
+              <p style={{ fontSize: '0.88rem', color: '#94A3B8', lineHeight: '1.5', margin: 0 }}>
+                Generates kid-friendly post-workout stories, adaptive difficulty, individual badges, and family recaps.
               </p>
+              <div style={{ fontSize: '0.75rem', color: '#64748B', marginTop: 'auto' }}>
+                Claude 3.5 Sonnet • Amazon Nova • Guardrails
+              </div>
+            </div>
+
+            <div className="glass-panel" style={{ padding: '24px', borderRadius: '20px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <h4 style={{ color: '#00FF87', margin: 0, fontSize: '1.2rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                📱 Mobile Vision PoseStream
+              </h4>
+              <p style={{ fontSize: '0.88rem', color: '#94A3B8', lineHeight: '1.5', margin: 0 }}>
+                A lightweight companion camera sends pose landmarks over WebSockets for responsive multiplayer scoring.
+              </p>
+              <div style={{ fontSize: '0.75rem', color: '#64748B', marginTop: 'auto' }}>
+                30 FPS • Adaptive smoothing • Multi-player tracking
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Process Flow Bar (4 connected steps) */}
+          <div className="glass-panel" style={{ padding: '20px 28px', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(0,255,135,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>📱</div>
+              <div>
+                <div style={{ fontSize: '0.9rem', fontWeight: '800', color: '#FFFFFF' }}>Mobile camera</div>
+                <div style={{ fontSize: '0.75rem', color: '#94A3B8' }}>Pose landmarks</div>
+              </div>
+            </div>
+            <span style={{ color: '#64748B', fontSize: '1.2rem' }}>→</span>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(255,153,0,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>📺</div>
+              <div>
+                <div style={{ fontSize: '0.9rem', fontWeight: '800', color: '#FFFFFF' }}>Fire TV game</div>
+                <div style={{ fontSize: '0.75rem', color: '#94A3B8' }}>D-pad + co-play</div>
+              </div>
+            </div>
+            <span style={{ color: '#64748B', fontSize: '1.2rem' }}>→</span>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(157,0,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>☁️</div>
+              <div>
+                <div style={{ fontSize: '0.9rem', fontWeight: '800', color: '#FFFFFF' }}>AWS Bedrock</div>
+                <div style={{ fontSize: '0.75rem', color: '#94A3B8' }}>Adaptive recap</div>
+              </div>
+            </div>
+            <span style={{ color: '#64748B', fontSize: '1.2rem' }}>→</span>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(0,240,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>🎤</div>
+              <div>
+                <div style={{ fontSize: '0.9rem', fontWeight: '800', color: '#FFFFFF' }}>Alexa coach</div>
+                <div style={{ fontSize: '0.75rem', color: '#94A3B8' }}>Voice commands</div>
+              </div>
             </div>
           </div>
         </div>

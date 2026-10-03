@@ -164,144 +164,227 @@ export const WorkoutGameEngine = ({ players, setPlayers, onFinishWorkout, awsCon
     }}>
       {/* Game Mode Selector Carousel (When not in active game) */}
       {!isPlaying && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <div>
-              <h2 style={{ fontSize: '2rem', fontWeight: '900', color: '#FFFFFF', margin: 0 }}>
-                Select Adventure Game Mode
-              </h2>
-              <p style={{ color: '#94A3B8', marginTop: '4px' }}>
-                Use Fire TV remote Arrow Keys to browse modes. Press Select to launch workout!
-              </p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+              <div style={{ width: '16px', height: '2px', background: '#FF9900' }} />
+              <span style={{ fontSize: '0.75rem', fontWeight: '800', color: '#FF9900', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                ADVENTURE MODE
+              </span>
             </div>
-
-            {/* Active Players Summary Badge */}
-            <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-              {activePlayers.map((p) => (
-                <div
-                  key={p.id}
-                  style={{
-                    padding: '8px 16px',
-                    borderRadius: '16px',
-                    background: `${p.color}22`,
-                    border: `1px solid ${p.color}`,
-                    color: '#FFFFFF',
-                    fontWeight: '700',
-                    fontSize: '0.85rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px'
-                  }}
-                >
-                  <span>{p.avatar}</span> {p.name}
-                </div>
-              ))}
-            </div>
+            <h2 style={{ fontSize: '2.5rem', fontWeight: '900', color: '#FFFFFF', margin: 0, letterSpacing: '-0.02em' }}>
+              Choose your family adventure
+            </h2>
+            <p style={{ color: '#94A3B8', marginTop: '6px', fontSize: '1.05rem' }}>
+              Move together, score together. Each quest adapts to your players and celebrates every win.
+            </p>
           </div>
 
+          {/* 4 Quest Cards Grid */}
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
             gap: '20px'
           }}>
-            {GAME_MODES.map((game) => {
+            {[
+              {
+                id: 'jungle-dash',
+                title: 'Jungle Dash',
+                description: 'Sprint, duck, and leap through a glowing rainforest trail.',
+                stats: '⏱ 12 min • Cardio • All ages',
+                icon: '🌲',
+                image: '/src/assets/jungle_dash.png',
+                accentColor: '#00FF87',
+                badgeText: 'REMOTE FOCUS',
+                badgeBg: '#FF9900'
+              },
+              {
+                id: 'cosmic-dance',
+                title: 'Cosmic Dance-Off',
+                description: 'Match the beat and power the family spaceship together.',
+                stats: '⏱ 10 min • Dance • Easy',
+                icon: '🎵',
+                image: '/src/assets/cosmic_dance.png',
+                accentColor: '#9D00FF',
+                badgeText: 'READY',
+                badgeBg: 'rgba(255, 255, 255, 0.15)'
+              },
+              {
+                id: 'lava-escape',
+                title: 'Lava Temple Escape',
+                description: 'Balance and squat across ancient platforms before time runs out.',
+                stats: '⏱ 14 min • Agility • Medium',
+                icon: '🔥',
+                image: '/src/assets/lava_temple.png',
+                accentColor: '#FF5500',
+                badgeText: 'READY',
+                badgeBg: 'rgba(255, 255, 255, 0.15)'
+              },
+              {
+                id: 'hero-training',
+                title: 'Superhero Academy',
+                description: 'Train your powers with punches, poses, and super-speed reps.',
+                stats: '⏱ 15 min • Strength • Medium',
+                icon: '🛡️',
+                image: '/src/assets/superhero_academy.png',
+                accentColor: '#00F0FF',
+                badgeText: 'READY',
+                badgeBg: 'rgba(255, 255, 255, 0.15)'
+              }
+            ].map((game) => {
               const isSelected = selectedGame.id === game.id;
               return (
                 <div
                   key={game.id}
                   onClick={() => {
                     playSound('select');
-                    setSelectedGame(game);
+                    const fullGame = GAME_MODES.find(g => g.id === game.id) || GAME_MODES[0];
+                    setSelectedGame(fullGame);
                   }}
                   onFocus={() => playSound('focus')}
                   tabIndex={0}
                   className={`tv-focusable glass-panel ${isSelected ? 'is-focused' : ''}`}
                   style={{
-                    padding: '24px',
                     borderRadius: '24px',
-                    borderColor: isSelected ? game.accentColor : 'rgba(255, 255, 255, 0.1)',
-                    background: isSelected
-                      ? `linear-gradient(135deg, ${game.accentColor}25 0%, rgba(10, 14, 26, 0.95) 100%)`
-                      : 'rgba(15, 20, 32, 0.6)',
+                    border: isSelected ? '2px solid #FF9900' : '1px solid rgba(255, 255, 255, 0.1)',
+                    background: 'rgba(12, 17, 30, 0.85)',
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '16px',
-                    position: 'relative'
+                    overflow: 'hidden',
+                    position: 'relative',
+                    boxShadow: isSelected ? '0 0 30px rgba(255, 153, 0, 0.4)' : 'none'
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: '3rem' }}>{game.icon}</span>
-                    <span style={{
-                      padding: '4px 10px',
+                  {/* Image Banner */}
+                  <div style={{
+                    width: '100%',
+                    height: '160px',
+                    backgroundImage: `url(${game.image})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    position: 'relative',
+                    padding: '16px',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start'
+                  }}>
+                    <div style={{
+                      position: 'absolute',
+                      inset: 0,
+                      background: 'linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(12,17,30,0.95) 100%)'
+                    }} />
+
+                    {/* Top Left Icon Circle */}
+                    <div style={{
+                      width: '40px',
+                      height: '40px',
                       borderRadius: '12px',
-                      background: 'rgba(255, 153, 0, 0.2)',
-                      color: '#FF9900',
-                      fontWeight: '800',
-                      fontSize: '0.75rem',
-                      textTransform: 'uppercase'
+                      background: `${game.accentColor}33`,
+                      border: `1px solid ${game.accentColor}66`,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '1.3rem',
+                      zIndex: 1,
+                      backdropFilter: 'blur(8px)'
                     }}>
-                      {game.difficulty}
+                      {game.icon}
+                    </div>
+
+                    {/* Top Right Status Badge */}
+                    <span style={{
+                      zIndex: 1,
+                      padding: '4px 10px',
+                      borderRadius: '10px',
+                      background: game.badgeBg,
+                      color: game.badgeText === 'REMOTE FOCUS' ? '#000000' : '#E2E8F0',
+                      fontWeight: '800',
+                      fontSize: '0.68rem',
+                      letterSpacing: '0.05em'
+                    }}>
+                      {game.badgeText}
                     </span>
                   </div>
 
-                  <div>
+                  {/* Body Text */}
+                  <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '10px', flex: 1 }}>
                     <h3 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#FFFFFF', margin: 0 }}>
                       {game.title}
                     </h3>
-                    <p style={{ fontSize: '0.85rem', color: '#94A3B8', marginTop: '6px', lineHeight: '1.4' }}>
+                    <p style={{ fontSize: '0.85rem', color: '#94A3B8', lineHeight: '1.4', margin: 0 }}>
                       {game.description}
                     </p>
-                  </div>
-
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    paddingTop: '12px',
-                    borderTop: '1px solid rgba(255,255,255,0.08)',
-                    fontSize: '0.85rem',
-                    color: '#CBD5E1'
-                  }}>
-                    <span>Target: <strong>{game.requiredMotion}</strong></span>
-                    <span style={{ color: game.accentColor, fontWeight: '700' }}>Goal: {game.targetReps} reps</span>
+                    <div style={{ marginTop: 'auto', paddingTop: '10px', fontSize: '0.8rem', color: '#00F0FF', fontWeight: '700' }}>
+                      {game.stats}
+                    </div>
                   </div>
                 </div>
               );
             })}
           </div>
 
-          {/* Big Start Quest Button */}
-          <button
-            onClick={() => {
-              playSound('select');
-              setGameTimeLeft(45);
-              setTotalScore(0);
-              setComboMultiplier(1);
-              setIsPlaying(true);
-            }}
-            onFocus={() => playSound('focus')}
-            tabIndex={0}
-            className="tv-focusable focus-cyan"
-            style={{
-              width: '100%',
-              padding: '24px',
-              borderRadius: '24px',
-              background: `linear-gradient(135deg, ${selectedGame.accentColor} 0%, #FF007A 100%)`,
-              color: '#FFFFFF',
-              fontWeight: '900',
-              fontSize: '1.5rem',
-              border: 'none',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '16px',
-              boxShadow: `0 0 40px ${selectedGame.accentColor}55`,
-              marginTop: '12px'
-            }}
-          >
-            <Play size={32} fill="#FFFFFF" />
-            Launch {selectedGame.title} (Fire TV 10-Foot AI Experience)
-          </button>
+          {/* Bottom Launch Bar Banner */}
+          <div style={{
+            background: 'rgba(12, 17, 30, 0.85)',
+            borderRadius: '20px',
+            border: '1px solid rgba(255, 255, 255, 0.12)',
+            padding: '20px 24px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <div style={{
+                width: '44px',
+                height: '44px',
+                borderRadius: '14px',
+                background: 'rgba(0, 255, 135, 0.15)',
+                border: '1px solid #00FF87',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '1.4rem'
+              }}>
+                🌲
+              </div>
+              <div>
+                <h4 style={{ fontSize: '1.2rem', fontWeight: '800', color: '#FFFFFF', margin: 0 }}>
+                  {selectedGame.title}
+                </h4>
+                <p style={{ fontSize: '0.82rem', color: '#94A3B8', marginTop: '3px' }}>
+                  2 players ready • Camera connected • Adaptive mode on
+                </p>
+              </div>
+            </div>
+
+            <button
+              onClick={() => {
+                playSound('select');
+                setGameTimeLeft(45);
+                setTotalScore(0);
+                setComboMultiplier(1);
+                setIsPlaying(true);
+              }}
+              onFocus={() => playSound('focus')}
+              tabIndex={0}
+              className="tv-focusable focus-cyan"
+              style={{
+                padding: '14px 28px',
+                borderRadius: '16px',
+                background: 'linear-gradient(90deg, #FF9900 0%, #FF007A 100%)',
+                color: '#FFFFFF',
+                fontWeight: '800',
+                fontSize: '1.05rem',
+                border: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                boxShadow: '0 0 25px rgba(255, 153, 0, 0.4)'
+              }}
+            >
+              Launch {selectedGame.title} ▷
+            </button>
+          </div>
         </div>
       )}
 
