@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Code2, Play, Check, Copy, Camera, Radio } from 'lucide-react';
 import { playSound } from '../services/audioSynthesizer';
+import balanceBlitzImg from '../assets/balance_blitz.png';
 
 export const OpenSourceModuleViewer = () => {
   const [isRunning, setIsRunning] = useState(false);
@@ -178,7 +179,7 @@ export const challenge = {
             width: '100%',
             height: '150px',
             borderRadius: '16px',
-            backgroundImage: 'url(/src/assets/balance_blitz.png)',
+            backgroundImage: `url(${balanceBlitzImg})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             position: 'relative',

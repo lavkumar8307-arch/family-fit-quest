@@ -4,6 +4,11 @@ import { GAME_MODES, generateSimulatedPoseTelemetry } from '../services/poseDete
 import { playSound } from '../services/audioSynthesizer';
 import confetti from 'canvas-confetti';
 
+import jungleDashImg from '../assets/jungle_dash.png';
+import cosmicDanceImg from '../assets/cosmic_dance.png';
+import lavaTempleImg from '../assets/lava_temple.png';
+import superheroAcademyImg from '../assets/superhero_academy.png';
+
 export const WorkoutGameEngine = ({ players, setPlayers, onFinishWorkout, awsConfig }) => {
   const [selectedGame, setSelectedGame] = useState(GAME_MODES[0]);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -193,7 +198,7 @@ export const WorkoutGameEngine = ({ players, setPlayers, onFinishWorkout, awsCon
                 description: 'Sprint, duck, and leap through a glowing rainforest trail.',
                 stats: '⏱ 12 min • Cardio • All ages',
                 icon: '🌲',
-                image: '/src/assets/jungle_dash.png',
+                image: jungleDashImg,
                 accentColor: '#00FF87',
                 badgeText: 'REMOTE FOCUS',
                 badgeBg: '#FF9900'
@@ -204,7 +209,7 @@ export const WorkoutGameEngine = ({ players, setPlayers, onFinishWorkout, awsCon
                 description: 'Match the beat and power the family spaceship together.',
                 stats: '⏱ 10 min • Dance • Easy',
                 icon: '🎵',
-                image: '/src/assets/cosmic_dance.png',
+                image: cosmicDanceImg,
                 accentColor: '#9D00FF',
                 badgeText: 'READY',
                 badgeBg: 'rgba(255, 255, 255, 0.15)'
@@ -215,7 +220,7 @@ export const WorkoutGameEngine = ({ players, setPlayers, onFinishWorkout, awsCon
                 description: 'Balance and squat across ancient platforms before time runs out.',
                 stats: '⏱ 14 min • Agility • Medium',
                 icon: '🔥',
-                image: '/src/assets/lava_temple.png',
+                image: lavaTempleImg,
                 accentColor: '#FF5500',
                 badgeText: 'READY',
                 badgeBg: 'rgba(255, 255, 255, 0.15)'
@@ -226,7 +231,7 @@ export const WorkoutGameEngine = ({ players, setPlayers, onFinishWorkout, awsCon
                 description: 'Train your powers with punches, poses, and super-speed reps.',
                 stats: '⏱ 15 min • Strength • Medium',
                 icon: '🛡️',
-                image: '/src/assets/superhero_academy.png',
+                image: superheroAcademyImg,
                 accentColor: '#00F0FF',
                 badgeText: 'READY',
                 badgeBg: 'rgba(255, 255, 255, 0.15)'
